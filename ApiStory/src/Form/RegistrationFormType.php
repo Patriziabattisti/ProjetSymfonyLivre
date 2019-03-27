@@ -20,7 +20,7 @@ class RegistrationFormType extends AbstractType
             ->add('password', RepeatedType::class, [
              'type' => PasswordType::class,
              'invalid_message' => 'The password fields must match.',
-             'options' => ['attr' => ['class' => 'password-field']],
+             'options' => ['attr' => ['class' => 'password-field form-label-group form-control']],
              'required' => true,
              'first_options'  => ['label' => 'Password'],
              'second_options' => ['label' => 'Repeat Password'],

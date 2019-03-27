@@ -3,13 +3,32 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+     <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto">
+        <div class="card card-signin flex-row my-5">
+          <div class="card-img-left d-none d-md-flex">
+             <!-- Background image for card set in CSS! -->
+          </div>
+          <div class="card-body">
+            
+    
+    
+    
+    <h1 class="card-title text-center">Inscription</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.password) }}
+    {{ form_start(registrationForm, {'attr':{class:'form-signin'} } ) }}
+        {{ form_row(registrationForm.username,{'attr':{id:'inputUsername' ,class:'form-label-group form-control'} } ) }}
+        {{ form_row(registrationForm.password ) }}
         
        
-        <button class="btn">Register</button>
+        <button class="btn btn-lg btn-primary btn-block text-uppercase">Register</button>
     {{ form_end(registrationForm) }}
+    
+    <a class="d-block text-center mt-2 small" href="/login">login</a>
+     </div>
+        </div>
+      </div>
+    </div>
+  </div>   
 {% endblock %}
