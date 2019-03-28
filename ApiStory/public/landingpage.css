@@ -1,0 +1,23 @@
+a{
+    background-color:blue;
+    text-decoration: none;
+    color:lightblue;
+    border: 2px solid lightblue;
+    border-radius:20px;
+    padding:5px;
+    width:150px;
+    text-align: center;
+}
+
+body{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+div{
+    width:50vw;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
