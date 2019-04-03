@@ -16,4 +16,14 @@ class AccueilController extends AbstractController
             'controller_name' => 'AccueilController',
         ]);
     }
+    
+    /**
+     * @Route("/accueil/nouvhistoire",name="nouvhistoire");
+     */
+    
+    public function nouvHistoire(){
+        
+        return $this->render('accueil/nouvhistoire.html.twig',[
+            'controller_name' => 'AccueilController']);
+    }
 }
