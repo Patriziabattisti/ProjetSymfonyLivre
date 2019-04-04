@@ -7,17 +7,28 @@ a{
     padding:5px;
     width:150px;
     text-align: center;
-}
-
-body{
+    height:50px;
     display:flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items:center;
+    
 }
+
+
 div{
     width:50vw;
+    
+}
+#monbody{
+    height:50vh;
+    width:95vw;
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items:center;
+    font-family: 'Pacifico', cursive;
+}
+#monbody a{
+    width:250px;
 }

@@ -1,0 +1,30 @@
+{% extends 'master_page.html.twig' %}
+
+{% block contenuMain %}
+    <form>
+        <div  id="form-group">
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="input">pseudo</label>
+                </div>
+                <input class="form-control" type="text" name="pseudo" placeholder="Admin" />
+            </div>
+
+            <div class="input-group input-group-lg"> 
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="input">avatar</label>
+                </div>
+                <input class="form-control" type="text" name="avatar" placeholder="avatar" />
+            </div>
+
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="input">nom</label>
+                </div>
+                <input class="form-control" type="text" name="nom" placeholder="Battisti" />
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit" value="Submit">Changer</button>
+    </form>
+ 
+{% endblock %}

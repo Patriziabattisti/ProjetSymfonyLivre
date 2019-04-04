@@ -7,22 +7,30 @@
         
         
         {% block stylesheets %}
-          <link rel="stylesheet" href="all.css"/>
-          <link rel="stylesheet" href="bootstrap.min.css"/>
-          <link rel="stylesheet" href="style.css"/>
+          <link rel="stylesheet" href="{{asset('all.css')}}"/>
+          <link rel="stylesheet" href="{{asset('bootstrap.min.css')}}"/>
+          <link rel="stylesheet" href="{{asset('style.css')}}"/>
+          <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+        
         {% endblock %}
     </head>
-    <body>
+    <body style="height:95vh;">
         <header>
-            <h1>Apistory</h1>
-            <a href="">Sortir</a>
+            <div class="jumbotron" style="width:100vw">
+                <h1>Apistory</h1>
+            </div>
+            <a id="btnsortie" href="/"  class="btn-lg close" aria-label="Close">
+                <span aria-hidden="true" >&times;</span>
+            </a>
         </header>
         {% block body %}{% endblock %}
         {% block javascripts %}
           
-            <script src="jquery-3.3.1.js"></script>
-            <script src="jquery.min.js"></script>
-            <script src="bootstrap.min.js"></script>
+            <script src="{{asset('jquery-3.3.1.js')}}"></script>
+            <script src="{{asset('jquery.min.js')}}"></script>
+            <script src="{{asset('bootstrap.min.js')}}"></script>
         {% endblock %}
           
     </body>

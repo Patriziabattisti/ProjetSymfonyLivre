@@ -1,0 +1,42 @@
+{% extends 'master_page.html.twig' %}
+
+{% block contenuMain %}
+    Nom<input type="text" id="inputNom" />
+    <button id="envoyerNom">Envoyer</button>
+    <div id="divMessage"></div>
+ 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+    envoyerNom.addEventListener ("click", function (event){
+        var xhr = new XMLHttpRequest ();
+        
+        xhr.onreadystatechange = function (){
+            if (xhr.readyState == 4){
+                if (xhr.status == 200){
+                    <!-- transformer le string JSON envoyé par le serveur
+                    // comme réponse en objet JavasScript-->
+                    console.log("hello");
+                    var reponse = JSON.parse (xhr.responseText);
+                    divMessage.innerHTML = reponse.message;
+                    console.log (reponse);
+                    console.log (typeof(reponse));
+                }
+                <!--// s'il y a une erreur:-->
+                else {
+                    <!--// effacer en production!-->
+                    console.log (xhr.reponseText);
+                }
+            }
+        }
+        xhr.open ('POST','/master/traitement/ajax');
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send ("nom=" + inputNom.value);
+
+    });    
+</script>
+{% endblock %}
+
+
+
