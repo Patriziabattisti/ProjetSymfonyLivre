@@ -36,7 +36,10 @@
         </main>
         <footer class="card-footer">
             <p>Copyright Apistory</p>
-            <a href="/accueil/nouvhistoire">Retour au livre</a>
+            {%if livre!=null%}
+            <a href="/accueil/nouvhistoire/{{livre.id}}">Retour au livre</a>
+            {%endif%}
+            <a href="/accueil">retour à ma page</a>
         </footer>
     
     </body>

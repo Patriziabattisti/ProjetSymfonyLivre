@@ -14,6 +14,7 @@ class LivreFormType extends AbstractType
         $builder
             ->add('titre')
             ->add('resume')
+            
         ;
     }
 

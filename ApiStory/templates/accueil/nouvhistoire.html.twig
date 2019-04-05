@@ -4,7 +4,10 @@
 
 {% block contenuMain %}
     <section >
-        <p>je suis dans la section de création d'histoire</p>
+        <p>je suis dans la section de {{livre.titre}}</p>
+        <div>
+            {{livre.resume}}
+        </div>
     </section>
     
 {% endblock %}

@@ -11,16 +11,93 @@
         height:30vh;
         background-color: white;
     }
+    .boutons {
+        padding: 10px;
+    }
+
+    #mydialog {
+        position:fixed;
+        top:50vh;
+        left:40vw;
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        padding:10px;
+        background-color:white;
+    }
+    .close{
+        display:none;
+    }
+    #magalerie{
+        display:flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+ 
+    
 </style>
 
 <div class="example-wrapper">
     <h1>ApiStory</h1>
-    <h2>Coucou {{app.user.username}}</h2>
-    <section >
+    <h2>Bonjour {{app.user.username}}</h2>
+    <section>
         <h3>Mes histoires</h3>
-        <div id="galerielivre"></div>
+        <div id="galerielivre">
+            <div id="magalerie">
+                {% for livre in meslivres %}
+                    
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{livre.titre}}</h5>
+                            <p class="card-text"> {{livre.resume}}</p>
+                            <a href="/accueil/nouvhistoire/{{livre.id}}" class="card-link">Ouvrir le livre</a>
+                        </div>
+                    </div>
+                    
+                {%endfor%}
+            </div>
+        </div>
         <h3>Ajouter une histoire</h3>
-        <div id="liena"><a href="/accueil/nouvhistoire" id="ajouthistoire">+</a></div>
+
     </section>
+    
+           
+        <div id="mydialog" class='close'> Créer un nouveau livre 
+            <div>
+                    {{form_start (formulaire)}}   
+
+                    {{form_widget (formulaire)}} 
+                    <div class="boutons">
+                        
+                        <button class="btn btn-lg btn-info" >Créer</button>
+                     </div>
+                    
+                    {{form_end (formulaire)}} 
+                    <div class='boutons'> <button class="btn btn-lg btn-warning" onclick="ferme()">Fermer</button>&nbsp;
+                    </div>
+            </div>
+
+  
+        </div>
+    
+    
+        <div  class="boutons">
+            <button onclick="show()">+</button>
+        </div>
 </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var $dialog = document.getElementById('mydialog');  
+        console.log("hello");
+        
+        function ferme(){
+            $dialog.classList.add('close');
+        }
+        function show(){
+            $dialog.classList.remove('close');
+        }
+
+    </script>
 {% endblock %}

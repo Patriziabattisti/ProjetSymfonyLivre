@@ -15,29 +15,8 @@ class AccueilController extends AbstractController
     /**
      * @Route("/accueil", name="accueil")
      */
-    public function index()
+    public function index(Request $requete)
     {
-        return $this->render('accueil/index.html.twig', [
-            'controller_name' => 'AccueilController',
-        ]);
-    }
-    
-    /**
-     * @Route("/accueil/nouvhistoire",name="nouvhistoire");
-     */
-    
-    public function nouvHistoire(){
-        
-        return $this->render('accueil/nouvhistoire.html.twig',[
-            'controller_name' => 'AccueilController']);
-    }
-    
-    
-    /**
-     * @Route("/accueil/enregistrement/histoire")
-     */
-    
-    public function enregistrementHistoire(Request $requete){
         $em=$this->getDoctrine()->getManager();
         $rep=$em->getRepository(Livre::class);
   
@@ -45,24 +24,40 @@ class AccueilController extends AbstractController
 
         $formulairelivre = $this->createForm (LivreFormType::class, $unlivre);
         $formulairelivre->handleRequest($requete);
-
+        $user=$this->getUser();
         
         if($formulairelivre->isSubmitted() && $formulairelivre->isValid()){
-            $user=$this->getUser();
-            $unlivre->setUser($user);
             
-            /*dump($unlivre);
-            die();*/
+            $unlivre->setUser($user);
   
             $em->persist($unlivre);
             $em->flush();
-            
-            return $this->render('/accueil/nouvhistoire.html.twig');
+            $vars=['livre'=>$unlivre];
+            return $this->render('/accueil/nouvhistoire.html.twig',$vars);
         }
-       
-        $vars = ['formulaire' => $formulairelivre->createView()];
-        return $this->render ('/accueil/formLivre.html.twig',$vars);
+        $livres=$rep->findBy(array('user'=>$user->getId()));
+    
         
-
+        $vars = ['formulaire' => $formulairelivre->createView(), 'meslivres'=>$livres];
+         return $this->render('accueil/index.html.twig', $vars);
+        
     }
+    
+    /**
+     * @Route("/accueil/nouvhistoire/{idlivre}",name="nouvhistoire");
+     */
+    
+    public function nouvHistoire(Request $req){
+        $em=$this->getDoctrine()->getManager();
+        $rep=$em->getRepository(Livre::class);
+
+        $monidlivre=$req->get('idlivre');
+        $monlivre=$rep->find($monidlivre);
+        
+        $vars=['controller_name' => 'AccueilController', 'livre'=>$monlivre];
+        return $this->render('accueil/nouvhistoire.html.twig',$vars);
+    }
+    
+    
+
 }
