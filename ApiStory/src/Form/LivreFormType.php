@@ -6,6 +6,7 @@ use App\Entity\Livre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class LivreFormType extends AbstractType
 {
@@ -14,7 +15,7 @@ class LivreFormType extends AbstractType
         $builder
             ->add('titre')
             ->add('resume')
-            
+            ->add('couverture', FileType::class , array ('label'=>"Sélectionner couverture"));
         ;
     }
 

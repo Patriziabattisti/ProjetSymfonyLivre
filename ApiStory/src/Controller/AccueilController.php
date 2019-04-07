@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\LivreFormType;
 use App\Entity\Livre;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 
 class AccueilController extends AbstractController
 {
@@ -27,9 +29,14 @@ class AccueilController extends AbstractController
         $user=$this->getUser();
         
         if($formulairelivre->isSubmitted() && $formulairelivre->isValid()){
+            $fichier=$unlivre->getCouverture();
+            $nomcouv= md5(uniqid()).".".$fichier->guessExtension();
+            
+            $fichier->move("couvertures",$nomcouv);
+            $unlivre->setCouverture($nomcouv);
             
             $unlivre->setUser($user);
-  
+     
             $em->persist($unlivre);
             $em->flush();
             $vars=['livre'=>$unlivre];

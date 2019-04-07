@@ -90,12 +90,12 @@ class Livre
         return $this;
     }
 
-    public function getCouverture(): ?string
+    public function getCouverture() 
     {
         return $this->couverture;
     }
 
-    public function setCouverture(?string $couverture): self
+    public function setCouverture($couverture) 
     {
         $this->couverture = $couverture;
 

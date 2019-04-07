@@ -7,8 +7,7 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     #galerielivre{
-        width:70vw;
-        height:30vh;
+        
         background-color: white;
     }
     .boutons {
@@ -32,12 +31,15 @@
         justify-content: space-around;
         align-items: center;
     }
+    section{
+        
+    }
  
     
 </style>
 
 <div class="example-wrapper">
-    <h1>ApiStory</h1>
+    
     <h2>Bonjour {{app.user.username}}</h2>
     <section>
         <h3>Mes histoires</h3>
@@ -46,7 +48,7 @@
                 {% for livre in meslivres %}
                     
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="" alt="Card image cap">
+                        <img class="card-img-top" src="./couvertures/{{livre.couverture}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{livre.titre}}</h5>
                             <p class="card-text"> {{livre.resume}}</p>
@@ -66,9 +68,10 @@
             <div>
                     {{form_start (formulaire)}}   
 
-                    {{form_widget (formulaire)}} 
-                    <div class="boutons">
-                        
+                    {{form_row (formulaire.titre)}} 
+                    {{form_row (formulaire.resume)}} 
+                    {{form_row (formulaire.couverture)}}
+                    <div class="boutons">                      
                         <button class="btn btn-lg btn-info" >Créer</button>
                      </div>
                     

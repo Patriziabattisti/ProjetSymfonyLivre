@@ -21,8 +21,11 @@
             <div class="jumbotron" style="width:100vw">
                 <h1>Apistory</h1>
             </div>
+             {%if app.user%}
+                <a class="btn-lg" href="/logout">Logout</a>
+             {%endif%}
             <a id="btnsortie" href="/"  class="btn-lg close" aria-label="Close">
-                <span aria-hidden="true" >&times;</span>
+                <span aria-hidden="true" style="color:black">&times;</span>
             </a>
         </header>
         {% block body %}{% endblock %}
