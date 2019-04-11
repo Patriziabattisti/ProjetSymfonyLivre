@@ -1,16 +1,62 @@
 {% extends 'master_page.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('userpage.css')}}"/>
+{% endblock %}
 {% block title %}ApiStory{% endblock %}
 
 {% block contenuMain %}
-    <section >
-        <p>je suis dans la section de {{livre.titre}}</p>
-        <div>
-            {{livre.resume}}
+    <section id='sectionmonlivre'>
+        <div id="mesboutons">
+            <button id='macouv' onclick='changeCouv()' class="btn btn-outline-info btn-lg">Changer la couverture</button>
+            <button id='moncontenu' onclick='envoie()' class="btn btn-primary btn-lg">Changer le titre et résumé </button>
         </div>
         
-        <img style="width:150px; height:200px;" src="../../couvertures/{{livre.couverture}}" alt="Card image cap">
+        <div  id='monlivre'>          
+            <h1 id='titrelivre'>{{livre.titre}}</h1>
+            <img  src="../../couvertures/{{livre.couverture}}" alt="Card image cap">
+        </div>
+        
+        <div>            
+            <p id='monresumetext'>{{livre.resume}}</p>
+        </div>
+      
     </section>
-    
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <form method="post" action="{{path('updatetitre')}}" id="monformtitre">
+                <p>Mettre à jour les champs Titre et Résumé ?</p>
+                <input name='titre' type="text" value="{{livre.titre}}" placeholder="{{livre.titre}}">
+                <textarea  name="resume" cols="30" rows="10" value="{{livre.resume}}">{{livre.resume}}</textarea>
+                
+                <button id="confirmUpdate">Confirmer</button>
+            </form>
+          </div>
+        </div>
+        
+        <div id="myModalCouv" class="modal">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <form method="post" action="{{path('updatecouv')}}">
+                <p>Choisir une nouvelle couverture:</p>
+                <input name='couverture' type="file">
+
+                <button id="confirmCouv">Changer</button>
+            </form>
+          </div>
+        </div>
+        
+        
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent()}}
+    <script src="{{asset('scriptupdate.js')}}"></script>
+{% endblock %}

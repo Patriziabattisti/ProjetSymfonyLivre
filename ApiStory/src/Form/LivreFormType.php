@@ -15,8 +15,8 @@ class LivreFormType extends AbstractType
         $builder
             ->add('titre')
             ->add('resume')
-            ->add('couverture', FileType::class , array ('label'=>"Sélectionner couverture"));
-        ;
+            ->add('couverture', FileType::class , array ('label'=>"Sélectionner couverture"), ['required'=>false]);
+        
     }
 
     public function configureOptions(OptionsResolver $resolver)

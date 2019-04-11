@@ -38,14 +38,14 @@ class AccueilController extends AbstractController
             $unlivre->setUser($user);
      
             $em->persist($unlivre);
-            $em->flush();
-            $vars=['livre'=>$unlivre];
-            return $this->render('/accueil/nouvhistoire.html.twig',$vars);
+            $em->flush();    
+            
         }
         $livres=$rep->findBy(array('user'=>$user->getId()));
     
         
         $vars = ['formulaire' => $formulairelivre->createView(), 'meslivres'=>$livres];
+        
          return $this->render('accueil/index.html.twig', $vars);
         
     }
@@ -55,13 +55,18 @@ class AccueilController extends AbstractController
      */
     
     public function nouvHistoire(Request $req){
+        
         $em=$this->getDoctrine()->getManager();
         $rep=$em->getRepository(Livre::class);
-
+     
         $monidlivre=$req->get('idlivre');
+        
         $monlivre=$rep->find($monidlivre);
         
-        $vars=['controller_name' => 'AccueilController', 'livre'=>$monlivre];
+        $req->getSession()->set('bookid', $monlivre);
+        
+        $vars=['controller_name' => 'AccueilController', 'livre'=>$monlivre];  
+        
         return $this->render('accueil/nouvhistoire.html.twig',$vars);
     }
     
