@@ -40,7 +40,7 @@ class Livre
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Chapitre", mappedBy="livre", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Chapitre", mappedBy="livre", orphanRemoval=true, cascade={"persist"})
      */
     private $chapitres;
 

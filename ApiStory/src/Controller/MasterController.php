@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Auteur;
 use App\Form\AuteurFormType;
 use App\Entity\Livre;
+use App\Entity\Chapitre;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class MasterController extends AbstractController
@@ -108,11 +109,59 @@ class MasterController extends AbstractController
     
     public function masterChapitres(Request $req){
         $livre=$req->getSession()->get('bookid');
+        $em=$this->getDoctrine()->getManager();
+        $repoLivre=$em->getRepository(Livre::class);
+        $livre= $repoLivre->find($livre->getId());
         
-         return $this->render('sectionUser/pagechapitres.html.twig', [
-            'controller_name' => 'MasterController','livre'=>$livre
-        ]);
+        $repochapitre=$em->getRepository(Chapitre::class);
+        
+        if($req->get('contenu')){
+            if($req->get('idchapitre')!=''){
+
+                $idchap=(int)$req->get('idchapitre');
+                $monchapitre=$repochapitre->find($idchap);
+                $monchapitre->setTitre($req->get('titre'));
+                $monchapitre->setContenu($req->get('contenu'));
+                            
+                $em->persist($monchapitre);
+                $em->flush();
+            }
+            else{
+
+                $monchapitre=new Chapitre();   
+                $monchapitre->setTitre($req->get('titre'));
+                $monchapitre->setContenu($req->get('contenu'));
+                $livre->addChapitre($monchapitre);
+            
+                $em->persist($livre);
+                $em->flush();
+            }
+
+        }
+  
+        $chapitres=$repochapitre->findBy(array('livre'=>$livre->getId()));
+        
+        $vars=['livre'=>$livre, 'chapitres'=>$chapitres];
+        
+        return $this->render('sectionUser/pagechapitres.html.twig',$vars);
     }
+    
+    /**
+     * @Route("/master/new/chapitre", name="newchap");
+     */
+    
+    public function NewChapitre(){
+        $chapitre=new Chapitre();
+        $chapitre->setTitre("Chap test");
+        $em=$this->getDoctrine()->getManager();
+        $repoLivre=$em->getRepository(Livre::class);
+        $livre = $repoLivre->find(1);
+        $chapitre->setLivre ($livre);
+        $em->persist($chapitre);
+        $em->flush();
+        die;
+    }
+    
     
     /**
      * @Route("/master/update/couv", name="updatecouv");
@@ -124,8 +173,9 @@ class MasterController extends AbstractController
         $replivre=$em->getRepository(Livre::class);
         
         $monlivre=$replivre->find($req->getSession()->get('bookid'));
-        $macouverture=$req->get('couverture');   
-        
+        $macouverture=$req->files->get('couverture');   
+//        dump($req);
+//        die;
         $couv=md5(uniqid()).".".$macouverture->guessExtension();
         
         $monlivre->setCouverture($couv);
@@ -158,6 +208,20 @@ class MasterController extends AbstractController
         $em->flush();
         
         return $this->redirectToRoute('nouvhistoire',['idlivre'=>$idlivre]);
+        
+    }
+    /**
+     * @Route("/master/docu", name="documentations")
+     */
+    
+    public function masterDocu(Request $req){
+        $livre=$req->getSession()->get('bookid');
+        
+        
+        return $this->render('sectionUser/pagedocument.html.twig', [
+            'controller_name' => 'MasterController','livre'=>$livre
+        ]);
+        
         
     }
 

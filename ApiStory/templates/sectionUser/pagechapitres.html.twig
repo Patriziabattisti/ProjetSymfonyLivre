@@ -1,5 +1,42 @@
 {% extends 'master_page.html.twig' %}
-
-{% block contenuMain %}
-    <p>page des chapitres</p>
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('chapitrepage.css')}}"/>
 {% endblock %}
+{% block contenuMain %}
+    <section id="sectionchapitre">
+        <nav class="menu">
+            <ol>
+                <li id="ajoutchap" class="menu-item">
+                  <a id='nouveauChap' href="#0">Nouveau  +</a>
+                </li>
+
+                <li id="menuchapitres" class="menu-item">
+                    <a href="#0">Chapitres</a>
+                    <ol class="sub-menu">
+
+                    {%for chapitre in chapitres %}
+                        <li class="submenu-item">
+                            <a class="chapitreLivre" data-id="{{chapitre.id}}" data-contenu="{{chapitre.contenu}}" href="#0">{{chapitre.titre}}</a>
+                        </li>
+                    {%endfor%}
+
+                    </ol>
+                </li>
+            </ol>
+        </nav>
+                    
+        <form id="plantravail" action="{{path('meschapitres')}}" method="post">
+            <input type='text' name='titre' value="" placeholder={{chapitre.titre|default('Chapitre')}}>
+            <textarea id="chapitreencours" name="contenu" >{{chapitre.contenu|default('')}}</textarea>
+            <input type="hidden" value="" name="idchapitre">
+            <button id='enregChap'>Enregistrer</button>
+        </form>
+        
+    </section>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    
+    <script src="{{asset('scripts/chapitres.js')}}"></script>
+ {%endblock%}
