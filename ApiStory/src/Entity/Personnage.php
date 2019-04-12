@@ -58,6 +58,11 @@ class Personnage
      */
     private $livre;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $principal;
+
     public function __construct()
     {
         $this->parent = new ArrayCollection();
@@ -206,6 +211,18 @@ class Personnage
         if ($this->livre->contains($livre)) {
             $this->livre->removeElement($livre);
         }
+
+        return $this;
+    }
+
+    public function getPrincipal(): ?bool
+    {
+        return $this->principal;
+    }
+
+    public function setPrincipal(?bool $principal): self
+    {
+        $this->principal = $principal;
 
         return $this;
     }

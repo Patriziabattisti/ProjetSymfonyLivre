@@ -1,7 +1,29 @@
 {% extends 'master_page.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        #tableauNewperso{
+            padding-top:30px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items: center;
+        }
+        form{
+            border:1px solid black;
+            width:50vw;
+            height:60vh;
+        }
+    </style>
+{% endblock %}
 {% block contenuMain %}
-    <div id="btnperso">
-        <a href="" class="btn btn-outline-danger btn-lg" style="color:orange">Retour</a>
-
-    </div>
+    <section id='tableauNewperso'>
+        <div>
+        {{form_start (formulaire)}}
+            {{form_widget(formulaire)}}
+            <button>Créer</button>
+        {{form_end (formulaire)}} 
+        </div>
+  
+    </section>
 {% endblock %}
