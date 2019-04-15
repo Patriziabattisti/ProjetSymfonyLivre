@@ -6,12 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Auteur;
 use App\Form\AuteurFormType;
 use App\Entity\Livre;
 use App\Entity\Chapitre;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+//use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class MasterController extends AbstractController
 {
@@ -81,7 +81,7 @@ class MasterController extends AbstractController
     }
 
     /**
-     * @Route("/master/perso");
+     * @Route("/master/perso", name="persos");
      */
     
     public function masterPerso(Request $req ){
@@ -146,21 +146,21 @@ class MasterController extends AbstractController
         return $this->render('sectionUser/pagechapitres.html.twig',$vars);
     }
     
-    /**
-     * @Route("/master/new/chapitre", name="newchap");
-     */
-    
-    public function NewChapitre(){
-        $chapitre=new Chapitre();
-        $chapitre->setTitre("Chap test");
-        $em=$this->getDoctrine()->getManager();
-        $repoLivre=$em->getRepository(Livre::class);
-        $livre = $repoLivre->find(1);
-        $chapitre->setLivre ($livre);
-        $em->persist($chapitre);
-        $em->flush();
-        die;
-    }
+//    /**
+//     * @Route("/master/new/chapitre", name="newchap");
+//     */
+//    
+//    public function NewChapitre(){
+//        $chapitre=new Chapitre();
+//        $chapitre->setTitre("Chap test");
+//        $em=$this->getDoctrine()->getManager();
+//        $repoLivre=$em->getRepository(Livre::class);
+//        $livre = $repoLivre->find(1);
+//        $chapitre->setLivre ($livre);
+//        $em->persist($chapitre);
+//        $em->flush();
+//        die;
+//    }
     
     
     /**
@@ -224,5 +224,22 @@ class MasterController extends AbstractController
         
         
     }
+     /**
+     * @Route("/master/livre/delete", name="deletelivre");
+     */
+    
+    public function LivreDelete(Request $req){
+        $em =$this->getDoctrine()->getManager();
+        $rep=$em->getRepository(Livre::class);
+        
+        $idlivre=$req->get('livredelete');
+        $livre=$rep->findOneBy(array('id'=>$idlivre));
+        
+        $em->remove($livre);
+        $em->flush();
+        
+        return $this->redirectToRoute('accueil');
+    }
+
 
 }

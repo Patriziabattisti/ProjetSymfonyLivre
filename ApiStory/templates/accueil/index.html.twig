@@ -31,7 +31,26 @@
         justify-content: space-around;
         align-items: center;
     }
-   
+    #listeLivres{
+        
+        position:fixed;
+        top:50vh;
+        left:40vw;
+        background:white;
+        width:40vw;
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        padding:10px;
+    }
+    #deleteLivre{
+        display:flex;
+        flex-direction:row;
+        justify-content: space-around;
+        align-items:center;
+    }
+    
+    .livreTodelete, #titreliste{
+        list-style: none;
+    }
 </style>
 
 <div class="example-wrapper">
@@ -55,7 +74,7 @@
                 {%endfor%}
             </div>
         </div>
-        <h3>Ajouter une histoire</h3>
+        <h3>Ajouter ou effacer une histoire</h3>
 
     </section>
     
@@ -76,26 +95,53 @@
                     </div>
             </div>
 
-  
         </div>
     
     
         <div  class="boutons">
-            <button onclick="show()">+</button>
+            <label for="button">Créer</label>
+            <button onclick="show()" class="btn btn-lg btn-success">+</button>
+            <label for="button">Effacer</label>
+            <button onclick="show2()" class="btn btn-lg btn-danger">-</button>
+        </div>
+                    
+        <div id="listeLivres" class='close'>
+            <form id='deleteLivre' action="{{path('deletelivre')}}" method="post">
+                <ul>
+                    <li id="titreliste">ATTENTION EFFACEMENT PERMANENT !</li>
+                {% for livre in meslivres %}
+
+                    <li class="livreTodelete">  
+                        <input type="radio" name="livredelete" value={{livre.id}}>
+                        <label for="input">{{livre.titre}}</label>                       
+                    </li>
+
+                {%endfor%}
+                </ul>
+                <button class="btn btn-lg btn-warning">Effacer le livre</button>        
+            </form>
+            <button class="btn btn-lg btn-danger" onclick="ferme2()">Annuler</button>
         </div>
 </div>
 
 {% endblock %}
 {% block javascripts %}
     <script>
-        var $dialog = document.getElementById('mydialog');  
+        var $dialog = document.getElementById('mydialog'); 
+        var $deletelivre=document.getElementById('listeLivres');
         console.log("hello");
         
         function ferme(){
             $dialog.classList.add('close');
         }
+        function ferme2(){
+            $deletelivre.classList.add('close');
+        }
         function show(){
             $dialog.classList.remove('close');
+        }
+        function show2(){
+            $deletelivre.classList.remove('close');
         }
 
     </script>

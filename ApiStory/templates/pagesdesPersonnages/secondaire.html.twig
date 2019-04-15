@@ -1,7 +1,46 @@
 {% extends 'master_page.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('style_pages/persodisplay.css')}}"/>
+ {%endblock%}
 {% block contenuMain %}
-    <div id="btnperso">
-        <a href="" class="btn btn-outline-danger btn-lg" style="color:orange">Retour</a>
- 
+<section id="sectionpersomod">
+    <aside>
+        <h4>Liste des personnages secondaires</h4>
+        <ul>
+        {% for perso in livreperso %}
+            <li id='{{perso.id}}'  data-physique="{{perso.descriptionPhysique}}" data-psy="{{perso.descriptionPsychologique}}">
+                    {{perso.nom}}  {{perso.prenom}}
+            </li>
+        {%endfor%}
+        </ul>
+    </aside>
+    <div id="detailperso">
+        <div class="card" style="width: 18rem;" id="fichedetail">
+            <div class="card-body">
+              <h5 class="card-title">Nom Prénom</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Description physique</h6>
+              <p class="card-text">Description psychologique</p>
+               <a href="#" class="card-link">Modifier ce personnage</a>
+            </div>
+        </div>
+       
     </div>
+    </section>
+    <div id='persomodif' style='display:none;'>
+        <form>
+            <input type='text' name="nom" value="">
+            <input type='text' name="prenom" value="">
+            <input type='number' name="id" value="" hidden>
+            <textarea name="descriptionPhysique"></textarea>
+            <textarea name="descriptionPsychologique"></textarea>
+            
+        </form>
+
+    </div>    
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    <script src="{{asset('scripts/persodisplay.js')}}"></script>
 {% endblock %}

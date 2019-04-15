@@ -51,6 +51,7 @@ class Livre
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Personnage", mappedBy="livre")
+     * @ORM\JoinTable(name="personnage_livre")
      */
     private $personnages;
 

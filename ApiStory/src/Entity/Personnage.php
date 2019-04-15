@@ -55,7 +55,15 @@ class Personnage
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Livre", inversedBy="personnages")
+     * @ORM\JoinTable(
+     * name="personnage_livre",
+     * joinColumns={
+     *  @ORM\JoinColumn(name="personnage_id", referencedColumnName="id")},
+     * inverseJoinColumns={@ORM\JoinColumn(name="livre_id",referencedColumnName="id")})
      */
+    
+
+    
     private $livre;
 
     /**

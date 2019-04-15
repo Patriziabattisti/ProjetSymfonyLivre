@@ -27,8 +27,7 @@ class PersonnageType extends AbstractType
             ->add('description_physique',TextareaType::class, array('label'=>"Détail physique"))
             ->add('description_psychologique',TextareaType::class, array('label'=>"Détail personnalité"))
             ->add('principal',ChoiceType::class, ['choices'=>['principal'=>true,'secondaire'=>false],'label'=>'Rôle']);
-            
-        
+         
     }
 
     public function configureOptions(OptionsResolver $resolver)

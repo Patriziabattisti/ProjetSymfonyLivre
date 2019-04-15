@@ -37,13 +37,12 @@ class PersonnageRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Personnage
+    public function findAllByPrincipal(): ?Personnage
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('p.principal = :true')
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
     */
