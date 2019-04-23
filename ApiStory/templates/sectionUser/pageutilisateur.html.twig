@@ -5,18 +5,73 @@
 {% endblock %}
 {% block contenuMain %}
     <section id='sectionauteur'>
-        <div id='formauteur'>
+        <div id='formauteur' class="container">
         {{form_start(formulaireauteur)}}
-            {{form_widget(formulaireauteur)}}
-            <button>Enregistrer</button>
+            <div class="md-form">
+            {{form_row(formulaireauteur.nom,{attr: {class: 'form-control'}})}}
+            </div>
+            <div class="md-form">
+            {{form_row(formulaireauteur.prenom,{attr: {class: 'form-control'}})}}
+            </div>
+            <div class='file-path-wrapper'>
+            {{form_row(formulaireauteur.photo,{attr: {class: 'file-path'}})}}
+            </div>
+            <div class="md-form">
+            {{form_row(formulaireauteur.bibliographie,{attr: {class: 'form-control'}})}}
+            </div>
+            <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0">Enregistrer/Changer</button>
         {{form_end(formulaireauteur)}}
 
         </div>
-        <div id='infoauteur'>
-            <p>Nom: {{auteur.nom|default("Nom auteur")}}</p>
-            <p>Prénom: {{auteur.prenom|default("Prénom auteur")}}</p>
-            <img id='photoauteur' src="../../photos/{{auteur.photo|default("logo.jpg")}}" alt="photo">
+        
+        <div id='infoauteur' class="card">
+            <h5 class="card-header info-color white-text text-center py-4">
+            <strong>Auteur</strong>
+            </h5>
+            <div class="card-body px-lg-5 pt-0">
+                <div class="text-center" style="color: #757575;">
+                    <p class="form-control"> {{auteur.nom|default("Nom auteur")}} {{auteur.prenom|default("Prénom auteur")}}</p>
+                    <div id="infodescauteur">
+                        <img id='photoauteur' src="../../photos/{{auteur.photo|default("logo.jpg")}}" alt="photo">
+                        <p id="biblio" name="bibliographie" class="form-control-plaintext">{{auteur.bibliographie|default('Espace pour bibliographie')}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     
 {% endblock %}
+
+{#
+            <div class="form-row">
+                <div class="col">
+                    <!-- First name -->
+                    <div class="md-form">
+                        <input type="text" id="materialRegisterFormFirstName" class="form-control">
+                        <label for="materialRegisterFormFirstName">First name</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <!-- Last name -->
+                    <div class="md-form">
+                        <input type="email" id="materialRegisterFormLastName" class="form-control">
+                        <label for="materialRegisterFormLastName">Last name</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Password -->
+            <div class="md-form">
+                <input type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
+                <label for="materialRegisterFormPassword">Password</label>
+                <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                    At least 8 characters and 1 digit
+                </small>
+            </div>#}
+
+
+
+   
+
+

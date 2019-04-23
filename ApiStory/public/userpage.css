@@ -14,7 +14,18 @@
 #sectionauteur{
     align-items: center;
 }
-
+#infoauteur{
+    display:flex;
+    flex-direction: column;
+    width:35vw;
+    margin-right:10px;
+    border:1px solid grey;
+}
+#formauteur{
+    width:40vw;
+    border:1px solid grey;
+    padding:5px;
+}
 
 img{
     padding-top: 5px;
@@ -30,6 +41,9 @@ img{
     width:25vw;
     height:55vh;
     border:1px solid white;
+}
+#resumeinput{
+    height:20vh;
 }
 #mesboutons{
     display: flex;

@@ -4,3 +4,25 @@
     justify-content: space-around;
     padding-top:10px;
 }
+#persomodif{
+    position:fixed;
+    background:white;
+    border:1px solid black;
+    top:13vh;
+    left:30vw;
+    padding:5px;
+    width:35vw;
+}
+/*#persomodif form{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left:5vw;
+}*/
+#btnconfirm, #btnmodifclose{
+    width:20vw;
+    margin-left:8vw;
+}
+.close{
+    display:none;
+}

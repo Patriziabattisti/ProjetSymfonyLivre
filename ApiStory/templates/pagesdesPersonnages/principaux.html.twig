@@ -18,25 +18,64 @@
     <div id="detailperso">
         <div class="card" style="width: 18rem;" id="fichedetail">
             <div class="card-body">
-              <h5 class="card-title">Nom Prénom</h5>
+              <h5 id="detailnom" data-nom="" data-prenom="" class="card-title">Nom Prénom</h5>
               <h6 class="card-subtitle mb-2 text-muted">Description physique</h6>
               <p class="card-text">Description psychologique</p>
-               <a href="#" class="card-link">Modifier ce personnage</a>
+
+              <button id="btnmodifopen"   class="btn btn-info">Modifier ce personnage</button>
             </div>
         </div>
        
     </div>
     </section>
-    <div id='persomodif' style='display:none;'>
+    <div id='persomodif' class="container close">
         <form>
-            <input type='text' name="nom" value="">
-            <input type='text' name="prenom" value="">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="modifnom">Nom</label>
+                    <input id="modifnom" type='text' name="nom" value="" class="form-control">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="modifprenom">Prénom</label>
+                    <input id="modifprenom" type='text' name="prenom" value="" class="form-control">
+                </div>
+            </div>
             <input type='number' name="id" value="" hidden>
-            <textarea name="descriptionPhysique"></textarea>
-            <textarea name="descriptionPsychologique"></textarea>
-            
+             <div class="form-row">
+                 <div class="form-group col-md-6">
+                    <label for="modifphys">Description physique</label>
+                    <textarea id="modifphys" name="descriptionPhysique" class="form-control"></textarea>
+                 </div>
+                 <div class="form-group col-md-6">
+                    <label for="modifpsy">Description psychologique</label>
+                   <textarea id="modifpsy" name="descriptionPsychologique" class="form-control"></textarea>
+                 </div>
+             </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Parents</label>
+                    <select name="parents" multiple class="form-control">
+                        {% for perso in listeperso %}
+                            <option value="{{perso.id}}">
+                                {{perso.nom}} {{perso.prenom}}
+                            </option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label >Enfants</label>
+                    <select name="enfants" multiple class="form-control">
+                        {% for perso in listeperso %}
+                            <option value="{{perso.id}}">
+                                {{perso.nom}} {{perso.prenom}}
+                            </option>
+                        {%endfor%}
+                    </select>
+                </div>
+            </div>
+            <button id='btnconfirm' type="submit" class="btn btn-primary">Modifier</button>       
         </form>
-
+        <button id="btnmodifclose" class="btn btn-danger">Annuler</button>
     </div>    
 {% endblock %}
 

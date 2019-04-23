@@ -1,0 +1,13 @@
+body{
+    display:flex; 
+    flex-direction:column; 
+    justify-content: space-around;
+    color:aqua;
+}
+h4{
+    color:aqua;
+}
+img{
+    width:200px; 
+    height:300px;
+} 

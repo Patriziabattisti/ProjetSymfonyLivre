@@ -56,7 +56,9 @@ class MasterController extends AbstractController
         $auteur=new Auteur();
         /*$auteur=$repoauteur->findOneBy(array('user'=>$user->getId()));
         dump($auteur);
-        die;*/      
+        die;*/ 
+        
+        
         $formulaireauteur = $this->createForm (AuteurFormType::class, $auteur);
         $formulaireauteur->handleRequest($req);
         

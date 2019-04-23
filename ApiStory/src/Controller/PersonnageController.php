@@ -58,7 +58,7 @@ class PersonnageController extends AbstractController
         $repoperso=$em->getRepository(Personnage::class);
         //$repolivre=$em->getRepository(Livre::class);
 
-        
+        $listeperso=$repoperso->findAll();
         $mesperso=$repoperso->findBy(array('principal'=>true));
         
         for($i=0;$i<count($mesperso);$i++){
@@ -70,7 +70,7 @@ class PersonnageController extends AbstractController
             }
         }
 
-        $vars=["livre"=>$livre, "livreperso"=>$persolivre];
+        $vars=["livre"=>$livre, "livreperso"=>$persolivre, 'listeperso'=>$listeperso];
         return $this->render('pagesdesPersonnages/principaux.html.twig', $vars);
     }
     

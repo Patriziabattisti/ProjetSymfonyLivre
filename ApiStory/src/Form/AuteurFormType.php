@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 /**
  * Description of AuteurFormType
@@ -28,6 +28,7 @@ class AuteurFormType extends AbstractType{
             ->add('nom',TextType::class, array('label'=>"Nom"))
             ->add('prenom',TextType::class, array('label'=>"Prénom"))
             ->add('photo', FileType::class , array ('label'=>"Sélectionner photo"), ['required'=>false])
+            ->add('bibliographie',TextareaType::class,array('label'=>'Bibliographie'))
             
         ;
     }

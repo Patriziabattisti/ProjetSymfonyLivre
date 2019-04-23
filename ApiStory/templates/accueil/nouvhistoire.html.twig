@@ -13,14 +13,21 @@
         </div>
         
         <div  id='monlivre'>          
-            <h1 id='titrelivre'>{{livre.titre}}</h1>
+            <h1 id='titrelivre' >{{livre.titre}}</h1>
             <img  src="../../couvertures/{{livre.couverture}}" alt="Card image cap">
         </div>
         
-        <div>            
-            <p id='monresumetext'>{{livre.resume}}</p>
+        <div class="panel panel-info">   
+            <div class="panel-heading" style="background-color:#ccccff"><h2>Résumé</h2></div>
+            <div class="panel-body" >
+             <p  id='monresumetext'style="background-color:#dcdcec">{{livre.resume}}</p>
+             </div>
         </div>
+        <a href="{{path('pdf_producer')}}">Générer le pdf de la couverture</a>
       
+ 
+  
+
     </section>
 
         <!-- The Modal -->
@@ -28,14 +35,20 @@
 
           <!-- Modal content -->
           <div class="modal-content">
-            <span class="close">&times;</span>
-            <form method="post" action="{{path('updatetitre')}}" id="monformtitre">
-                <p>Mettre à jour les champs Titre et Résumé ?</p>
-                <input name='titre' type="text" value="{{livre.titre}}" placeholder="{{livre.titre}}">
-                <textarea  name="resume" cols="30" rows="10" value="{{livre.resume}}">{{livre.resume}}</textarea>
-                
-                <button id="confirmUpdate">Confirmer</button>
-            </form>
+             <div class="container">
+                 
+                 <div class="row" style='display:flex;flex-direction: row; justify-content: space-around'>
+                     <h5 class='form-title' style="color:#0066cc">Mettre à jour les champs Titre et Résumé ?</h5>
+                   <span class="close">&times;</span>
+                 </div>
+                <form method="post" action="{{path('updatetitre')}}" id="monformtitre">
+                    
+                    <input class="form-control" name='titre' type="text" value="{{livre.titre}}" placeholder="{{livre.titre}}">
+                    <textarea class="form-control" id='resumeinput' name="resume" cols="30" rows="10" value="{{livre.resume}}">{{livre.resume}}</textarea>
+
+                    <button id="confirmUpdate" class="btn btn-info">Confirmer</button>
+                </form>
+             </div>
           </div>
         </div>
         
@@ -48,7 +61,7 @@
                 <p>Choisir une nouvelle couverture:</p>
                 <input name='couverture' type="file">
 
-                <button id="confirmCouv">Changer</button>
+                <button id="confirmCouv" class="btn btn-info">Changer</button>
             </form>
           </div>
         </div>
