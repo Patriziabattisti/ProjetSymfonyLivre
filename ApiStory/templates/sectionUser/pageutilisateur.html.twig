@@ -8,16 +8,16 @@
         <div id='formauteur' class="container">
         {{form_start(formulaireauteur)}}
             <div class="md-form">
-            {{form_row(formulaireauteur.nom,{attr: {class: 'form-control'}})}}
+            {{form_row(formulaireauteur.nom,{'attr': {'class': 'form-control'}})}}
             </div>
             <div class="md-form">
-            {{form_row(formulaireauteur.prenom,{attr: {class: 'form-control'}})}}
+            {{form_row(formulaireauteur.prenom,{'attr': {'class': 'form-control'}})}}
             </div>
             <div class='file-path-wrapper'>
-            {{form_row(formulaireauteur.photo,{attr: {class: 'file-path'}})}}
+            {{form_row(formulaireauteur.photo,{'attr': {'class': 'file-path'}})}}
             </div>
             <div class="md-form">
-            {{form_row(formulaireauteur.bibliographie,{attr: {class: 'form-control'}})}}
+            {{form_row(formulaireauteur.bibliographie,{'attr': {'class': 'form-control'}})}}
             </div>
             <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0">Enregistrer/Changer</button>
         {{form_end(formulaireauteur)}}
@@ -42,33 +42,7 @@
     
 {% endblock %}
 
-{#
-            <div class="form-row">
-                <div class="col">
-                    <!-- First name -->
-                    <div class="md-form">
-                        <input type="text" id="materialRegisterFormFirstName" class="form-control">
-                        <label for="materialRegisterFormFirstName">First name</label>
-                    </div>
-                </div>
-                <div class="col">
-                    <!-- Last name -->
-                    <div class="md-form">
-                        <input type="email" id="materialRegisterFormLastName" class="form-control">
-                        <label for="materialRegisterFormLastName">Last name</label>
-                    </div>
-                </div>
-            </div>
 
-
-            <!-- Password -->
-            <div class="md-form">
-                <input type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
-                <label for="materialRegisterFormPassword">Password</label>
-                <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-                    At least 8 characters and 1 digit
-                </small>
-            </div>#}
 
 
 

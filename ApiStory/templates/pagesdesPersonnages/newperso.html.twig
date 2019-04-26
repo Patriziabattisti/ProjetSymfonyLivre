@@ -9,23 +9,45 @@
             justify-content:center;
             align-items: center;
         }
-        form{
+{#        form{
             border:1px solid black;
             width:50vw;
-            height:60vh;
-        }
+            height:70vh;
+            padding:10px;
+        }#}
+.dropdown-item{
+    border:1px solid lightgrey;
+    border-radius:5px;}
     </style>
 {% endblock %}
 {% block contenuMain %}
     <section id='tableauNewperso'>
-        <div>
+        <div class="container" >
         {{form_start (formulaire)}}
-            {{form_widget(formulaire)}}
-            <button>Créer</button>
+            <div class="md-form">
+                {{form_row(formulaire.nom,{'attr': {'class': 'form-control'}})}}
+            </div>
+            <div class="md-form">
+                {{form_row(formulaire.prenom,{'attr': {'class': 'form-control'}})}}
+            </div>
+            <div class='dropdown'>
+                {{form_row(formulaire.origine,{'attr': {'class': 'dropdown-item'}})}}
+            </div>
+            <div class='md-form'>    
+                {{form_row(formulaire.description_physique,{'attr': {'class': 'form-control'}})}}
+            </div>
+            <div class="md-form">
+                {{form_row(formulaire.description_psychologique,{'attr': {'class': 'form-control'}})}}
+            </div>  
+            <div class='dropdown'>
+                {{form_row(formulaire.principal,{'attr': {'class': 'dropdown-item'}})}}
+            </div>
+            <br>
+            <button class="btn btn-info">Créer</button>
         {{form_end (formulaire)}} 
         </div>
         <div>
-            <p>Vous avez la possibilité de rajouter des liens de parenté avec d'autres personnages dans la fiche du perso</p>
+            <p style="font-size:10px">Vous avez la possibilité de rajouter des liens de parenté avec d'autres personnages dans la fiche du perso</p>
         </div>
   
     </section>

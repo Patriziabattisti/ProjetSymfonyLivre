@@ -1,5 +1,57 @@
 {% extends 'master_page.html.twig' %}
-
-{% block contenuMain %}
-    <p>page des documents</p>
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        #sectiondocu{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            height:70%;
+        }
+        .dropdown-item{
+            border:1px solid lightgrey;
+            border-radius:5px;
+        }
+    </style>
 {% endblock %}
+{% block contenuMain %}
+    <section id="sectiondocu">
+        <div class="container" >
+            <h3>Création de monde</h3>
+            {{form_start (formulaire)}}
+            <div class="md-form">
+                {{form_row(formulaire.nom,{'attr': {'class': 'form-control'}})}}
+            </div>
+            <div class="md-form">
+                {{form_row(formulaire.description,{'attr': {'class': 'form-control'}})}}
+            </div>
+
+            <button class="btn btn-info">Créer</button>
+            {{form_end(formulaire)}}
+        </div>
+
+        <div class="container" >
+            <h3>Création de lieux</h3>
+            {{form_start (formulairelieux)}}
+            <div class="md-form">
+                {{form_row(formulairelieux.Nom,{'attr': {'class': 'form-control'}})}}
+            </div>
+            <div class="md-form">
+                {{form_row(formulairelieux.pays,{'attr': {'class': 'form-control'}})}}
+            </div>
+            <div class="md-form">
+                {{form_row(formulairelieux.ville,{'attr': {'class': 'form-control'}})}}
+            </div>
+            <div class="md-form">
+                {{form_row(formulairelieux.description,{'attr': {'class': 'form-control'}})}}
+            </div>
+            <div class='dropdown'>
+                {{form_row(formulairelieux.monde,{'attr': {'class': 'dropdown-item'}})}}
+            </div>
+            <button class="btn btn-info">Créer</button>
+            {{form_end(formulairelieux)}}
+        </div>
+    
+    </section>
+{% endblock %}
+   

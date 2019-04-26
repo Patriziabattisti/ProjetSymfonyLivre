@@ -27,10 +27,12 @@
         </nav>
                     
         <form id="plantravail" action="{{path('meschapitres')}}" method="post">
-            <input type='text' name='titre' value="" placeholder={{chapitre.titre|default('Chapitre')}}>
-            <textarea id="chapitreencours" name="contenu" >{{chapitre.contenu|default('')}}</textarea>
+            
+            <input type='text' name='titre' value="" placeholder='Chapitre' class='form-control' style='width:66%'>
+           
+            <textarea id="chapitreencours" name="contenu" >''</textarea>
             <input type="hidden" value="" name="idchapitre">
-            <button id='enregChap'>Enregistrer</button>
+            <button class="btn btn-info btn-lg" id='enregChap'>Enregistrer</button>
         </form>
         
     </section>

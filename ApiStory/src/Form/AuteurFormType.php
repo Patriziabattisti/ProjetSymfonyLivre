@@ -25,9 +25,9 @@ class AuteurFormType extends AbstractType{
    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom',TextType::class, array('label'=>"Nom"))
-            ->add('prenom',TextType::class, array('label'=>"Prénom"))
-            ->add('photo', FileType::class , array ('label'=>"Sélectionner photo"), ['required'=>false])
+            ->add('nom',TextType::class, array('label'=>"Nom", 'required'=>false))
+            ->add('prenom',TextType::class, array('label'=>"Prénom", 'required'=>false))
+            ->add('photo', FileType::class , array ('label'=>"Sélectionner photo", 'required'=>false))
             ->add('bibliographie',TextareaType::class,array('label'=>'Bibliographie'))
             
         ;

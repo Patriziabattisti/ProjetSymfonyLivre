@@ -11,6 +11,10 @@ use App\Entity\Auteur;
 use App\Form\AuteurFormType;
 use App\Entity\Livre;
 use App\Entity\Chapitre;
+use App\Form\LieuxFormType;
+use App\Entity\Lieux;
+use App\Form\MondeFormType;
+use App\Entity\Monde;
 //use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class MasterController extends AbstractController
@@ -54,15 +58,21 @@ class MasterController extends AbstractController
         $repoauteur=$em->getRepository(Auteur::class);
         
         $auteur=new Auteur();
-        /*$auteur=$repoauteur->findOneBy(array('user'=>$user->getId()));
-        dump($auteur);
-        die;*/ 
-        
-        
+
+        $monauteur=$user->getAuteur();
+ 
         $formulaireauteur = $this->createForm (AuteurFormType::class, $auteur);
         $formulaireauteur->handleRequest($req);
         
         if($formulaireauteur->isSubmitted() && $formulaireauteur->isValid()){
+            
+            if($user->getAuteur()){
+                $monauteur=$user->getAuteur();
+                //dump($auteur);
+                $auteur=$repoauteur->miseAjour($auteur,$monauteur);
+
+            }
+            else{
             $fichier=$auteur->getPhoto();
             $photo= md5(uniqid()).".".$fichier->guessExtension();
             
@@ -70,9 +80,10 @@ class MasterController extends AbstractController
             $auteur->setPhoto($photo);
             
             $auteur->setUser($user);
-     
+            }
             $em->persist($auteur);
             $em->flush();    
+            
         } 
         if($repoauteur->findOneBy(array('user'=>$user->getId()))!=null){
             $auteur=$repoauteur->findOneBy(array('user'=>$user->getId()));
@@ -148,21 +159,6 @@ class MasterController extends AbstractController
         return $this->render('sectionUser/pagechapitres.html.twig',$vars);
     }
     
-//    /**
-//     * @Route("/master/new/chapitre", name="newchap");
-//     */
-//    
-//    public function NewChapitre(){
-//        $chapitre=new Chapitre();
-//        $chapitre->setTitre("Chap test");
-//        $em=$this->getDoctrine()->getManager();
-//        $repoLivre=$em->getRepository(Livre::class);
-//        $livre = $repoLivre->find(1);
-//        $chapitre->setLivre ($livre);
-//        $em->persist($chapitre);
-//        $em->flush();
-//        die;
-//    }
     
     
     /**
@@ -213,18 +209,50 @@ class MasterController extends AbstractController
         
     }
     /**
+     * @Route("/master/choice/docu", name="choicedocu")
+     */
+    public function choiceDocu(Request $req){
+      $livre=$req->getSession()->get('bookid');
+      $vars=["livre"=>$livre];
+      return $this->render('sectionUser/docubtn.html.twig',$vars);
+    }
+    
+    
+    /**
      * @Route("/master/docu", name="documentations")
      */
     
     public function masterDocu(Request $req){
+        $em=$this->getDoctrine()->getManager();
         $livre=$req->getSession()->get('bookid');
         
+        $monde=new Monde();
+        $lieux=new Lieux();
         
-        return $this->render('sectionUser/pagedocument.html.twig', [
-            'controller_name' => 'MasterController','livre'=>$livre
-        ]);
+        $replivre=$em->getRepository(Livre::class);     
+        $monlivre=$replivre->find($req->getSession()->get('bookid'));
         
+        $formulairemonde = $this->createForm(MondeFormType::class, $monde);
+        $formulairemonde->handleRequest($req);
         
+        $formulairelieux=$this->createForm(LieuxFormType::class, $lieux);
+        $formulairelieux->handleRequest($req);
+        
+        if($formulairemonde->isSubmitted() && $formulairemonde->isValid()){
+            
+            $monde->addLivre($monlivre);
+            $em->persist($monde);
+            $em->flush();
+          
+        }
+        if($formulairelieux->isSubmitted() && $formulairelieux->isValid()){
+            
+          $em->persist($lieux);
+          $em->flush();
+        }
+        $vars=['formulaire'=>$formulairemonde->createView(),'formulairelieux'=>$formulairelieux->createView(), 'livre'=>$livre];
+        return $this->render('sectionUser/pagedocument.html.twig',$vars);
+     
     }
      /**
      * @Route("/master/livre/delete", name="deletelivre");

@@ -47,4 +47,28 @@ class AuteurRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function miseAjour(Auteur $nouvauteur, Auteur $monauteur){
+        
+      
+        if($nouvauteur->getNom()!=null){
+            $monauteur->setNom($nouvauteur->getNom());
+        }
+        if($nouvauteur->getPrenom()!=null){
+            $monauteur->setPrenom($nouvauteur->getPrenom());
+        }
+        if($nouvauteur->getPhoto()!=null){
+            $fichier=$nouvauteur->getPhoto();
+            $photo= md5(uniqid()).".".$fichier->guessExtension();
+            
+            $fichier->move("photos",$photo);
+            $monauteur->setPhoto($photo);
+        }
+        if($nouvauteur->getBibliographie()!=null){
+            $monauteur->setBibliographie($nouvauteur->getBibliographie());
+        }
+        
+        
+        return $monauteur;
+        
+    }
 }
