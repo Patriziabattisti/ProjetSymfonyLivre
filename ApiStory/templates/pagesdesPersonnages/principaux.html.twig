@@ -9,7 +9,7 @@
         <h4>Liste des personnages principaux</h4>
         <ul>
         {% for perso in livreperso %}
-            <li id='{{perso.id}}'  data-physique="{{perso.descriptionPhysique}}" data-psy="{{perso.descriptionPsychologique}}">
+            <li onmouseover="this.style.color='lightblue';this.style.cursor='pointer'" onmouseout="this.style.color='black'"class="mesli" id='{{perso.id}}'  data-physique="{{perso.descriptionPhysique}}" data-psy="{{perso.descriptionPsychologique}}">
                     {{perso.nom}}  {{perso.prenom}}
             </li>
         {%endfor%}
@@ -22,7 +22,7 @@
               <h6 class="card-subtitle mb-2 text-muted">Description physique</h6>
               <p class="card-text">Description psychologique</p>
 
-              <button id="btnmodifopen"   class="btn btn-info">Modifier ce personnage</button>
+              <button id="btnmodifopen" class="btn btn-info">Modifier ce personnage</button>
             </div>
         </div>
        

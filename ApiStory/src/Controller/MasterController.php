@@ -73,12 +73,13 @@ class MasterController extends AbstractController
 
             }
             else{
-            $fichier=$auteur->getPhoto();
-            $photo= md5(uniqid()).".".$fichier->guessExtension();
-            
-            $fichier->move("photos",$photo);
-            $auteur->setPhoto($photo);
-            
+                if($auteur->getPhoto()){
+                    $fichier=$auteur->getPhoto();
+                    $photo= md5(uniqid()).".".$fichier->guessExtension();
+
+                    $fichier->move("photos",$photo);
+                    $auteur->setPhoto($photo);
+                }  
             $auteur->setUser($user);
             }
             $em->persist($auteur);

@@ -55,12 +55,21 @@
     .livreTodelete, #titreliste{
         list-style: none;
     }
-    /*.card{
-        width:25vw;    
-    }*/
+    .card-link{
+        font-size:12px; 
+        font-weight: bold;
+        color:blue;
+    }
+    .card-title{
+        font-size:13px;
+        font-family: 'Pacifico', cursive;
+    }
     .card-img-top{
-        height:200px;
-        width:120px;
+        height:190px;
+        width:116px;
+    }
+    .card-body{
+        padding:13px;
     }
 
 
@@ -70,7 +79,7 @@
     
     <h2>Bonjour {{app.user.username}}</h2>
     <section>
-        <h3>Mes histoires</h3>
+        <h3 style="color:white">Mes histoires</h3>
         <div id="galerielivre">
             <div id="magalerie">
                 {% for livre in meslivres %}
@@ -79,7 +88,7 @@
                         <img class="card-img-top" src="./couvertures/{{livre.couverture}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{livre.titre}}</h5>
-                            <p class="card-text"> {{livre.resume}}</p>
+                            {#<p class="card-text"> {{livre.resume}}</p>#}
                             <a href="/accueil/nouvhistoire/{{livre.id}}" class="card-link">Ouvrir le livre</a>
                         </div>
                     </div>
@@ -87,7 +96,7 @@
                 {%endfor%}
             </div>
         </div>
-        <h3>Ajouter ou effacer une histoire</h3>
+        <h3 style="color:white">Ajouter ou effacer une histoire</h3>
 
     </section>
     
